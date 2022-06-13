@@ -15,7 +15,12 @@ model = neptune.init_model(
     # api_token=os.environ["NEPTUNE_API_TOKEN"],
 # )
 
-model_version = neptune.init_model_version(model="MLPROD-REVCLF")
+model_version = neptune.init_model_version(
+    model="MLPROD-REVCLF",
+    version=os.environ["GITHUB_SHA"]
+)
+model_version["github_sha"] = os.environ["GITHUB_SHA"]
+model_version["github_ref"] = os.environ["GITHUB_REF"]
 model_version["parameters"].upload('parameters.json')
 model_version["training_code"].upload('src/train.py')
 model_version.stop()

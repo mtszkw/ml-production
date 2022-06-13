@@ -26,5 +26,7 @@ jobs:
           python src/train.py
 
       - name: Register model
+        env:
+          NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
         run: |
           python src/register.py
