@@ -1,4 +1,4 @@
-name: mnist-workflow
+name: Quick Training
 on:
   pull_request:
     types: [edited, opened, synchronize, reopened]
