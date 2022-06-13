@@ -17,6 +17,8 @@ model = neptune.init_model(
 
 model_version = neptune.init_model_version(
     model="MLPROD-REVCLF",
+    project="mtszkw/ml-production",
+    api_token=os.environ["NEPTUNE_API_TOKEN"],
     version=os.environ["GITHUB_SHA"]
 )
 model_version["github_sha"] = os.environ["GITHUB_SHA"]
