@@ -11,6 +11,7 @@ try:
         project="mtszkw/ml-production",
         api_token=os.environ["NEPTUNE_API_TOKEN"],
     )
+    model.stop()
 except neptune.exceptions.NeptuneModelKeyAlreadyExistsError:
     print("Model key already exists, skipping...")
 
@@ -27,10 +28,3 @@ model_version["model/training_code"].upload('src/train.py')
 model_version["model/binary"].upload(os.environ['MODEL_ARCHIVE_OUTPUT_PATH'])
 
 model_version.stop()
-
-
-
-model.stop()
-
-
-# run.stop()
