@@ -3,17 +3,17 @@ import json
 
 import neptune.new as neptune
 
-model = neptune.init_model(
-    name="Review Classification",
-    key="REVCLF",
-    project="mtszkw/ml-production",
-    api_token=os.environ["NEPTUNE_API_TOKEN"],
-)
 
-# run = neptune.init(
-    # project="mtszkw/ml-production",
-    # api_token=os.environ["NEPTUNE_API_TOKEN"],
-# )
+try:
+    model = neptune.init_model(
+        name="Review Classification",
+        key="REVCLF",
+        project="mtszkw/ml-production",
+        api_token=os.environ["NEPTUNE_API_TOKEN"],
+    )
+except neptune.exceptions.NeptuneModelKeyAlreadyExistsError:
+    print("Model key already exists, skipping...")
+
 
 model_version = neptune.init_model_version(
     model="MLPROD-REVCLF",
