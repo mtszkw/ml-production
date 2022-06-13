@@ -21,7 +21,7 @@ model_version = neptune.init_model_version(
     project='mtszkw/ml-production',
     api_token=os.environ['NEPTUNE_API_TOKEN'],
 )
-model_version["sys/GIT_COMMIT"] = os.environ['GIT_COMMIT']
+model_version["data/git_commit"] = os.getenv('GIT_COMMIT', 'Null')
 model_version["model/parameters"].upload('parameters.json')
 model_version["model/training_code"].upload('src/train.py')
 model_version["model/binary"].upload(os.environ['MODEL_ARCHIVE_OUTPUT_PATH'])
