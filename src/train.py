@@ -37,10 +37,10 @@ def train_and_save(model_export_path: Path):
         metrics=['accuracy'])
 
     # Parameters
-    parameters = dict(
-        ('epochs', 10),
-        ('batch_size', 512),
-    )
+    parameters = dict({
+        "epochs": 10,
+        "batch_size": 512
+    })
     with open('parameters.json', 'w') as fp:
         json.dump(parameters, fp)
 
