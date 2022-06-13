@@ -26,6 +26,5 @@ jobs:
           python src/train.py
 
       - name: Register model
-        env:
         run: |
           python src/register.py
