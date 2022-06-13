@@ -1,7 +1,8 @@
-name: Quick Training
+name: Deployment
 on:
-  pull_request:
-    types: [edited, opened, synchronize, reopened]
+  push:
+    branches:
+      - master
 jobs:
   run-workflow:
     runs-on: [ubuntu-20.04]
@@ -23,9 +24,4 @@ jobs:
           MODEL_EXPORT_DIRECTORY: "bin/review_classifier/"
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
         run: |
-          python src/train.py
-
-      - name: Register model
-        env:
-        run: |
-          python src/register.py
+          ls
