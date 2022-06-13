@@ -52,9 +52,14 @@ def train_and_save(model_export_path: Path):
         verbose=1)
 
     # Evaluate
+    metrics_dict = dict()
     results = model.evaluate(test_data.batch(parameters['batch_size']), verbose=2)
     for name, value in zip(model.metrics_names, results):
         print("%s: %.3f" % (name, value))
+        metrics_dict[f"test_{name}"] = value
+    # Export metrics to file
+    with open('metrics.json', 'w') as fp:
+        json.dump(metrics_dict, fp)    
 
     for sample in ["absolutely the best", "total crap, nightmare and misunderstanding"]:
         print(f"{sample} => {model.predict([sample])}")

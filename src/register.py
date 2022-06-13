@@ -23,6 +23,7 @@ model_version = neptune.init_model_version(
 )
 model_version["data/git_commit"] = os.getenv('GIT_COMMIT', 'Null')
 model_version["model/parameters"].upload('parameters.json')
+model_version["model/metrics"].upload('metrics.json')
 model_version["model/training_code"].upload('src/train.py')
 model_version["model/binary"].upload(os.environ['MODEL_ARCHIVE_OUTPUT_PATH'])
 
