@@ -17,3 +17,5 @@ newest_model = model_versions_df[
 print('Newest version:', newest_model)
 
 print(newest_model.shape)
+
+model.close()

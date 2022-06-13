@@ -36,6 +36,7 @@ jobs:
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
           GIT_COMMIT: ${{ github.event.after }}
         run: |
+          echo $GIT_COMMIT
           python src/register.py
 
       - name: Download model from registry
@@ -44,4 +45,5 @@ jobs:
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
           GIT_COMMIT: ${{ github.event.after }}
         run: |
+          echo $GIT_COMMIT
           python src/download_from_registry.py
