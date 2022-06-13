@@ -32,7 +32,7 @@ jobs:
         env:
           NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
-          GIT_COMMIT: ${{ github.event.after }}
+          PULL_REQUEST_ID: ${{ github.event.number }}
         run: |
-          echo $GIT_COMMIT
+          echo $PULL_REQUEST_ID
           python src/register.py
