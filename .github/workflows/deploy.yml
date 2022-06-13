@@ -27,5 +27,6 @@ jobs:
           MODEL_AWS_REGION: "eu-central-1"
           NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
         run: |
-          python src/download_from_registry.py
+          echo $GIT_COMMIT
+          python src/download_and_deploy_model.py
           ls

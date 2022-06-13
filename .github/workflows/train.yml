@@ -18,8 +18,6 @@ jobs:
           
       - name: Run training
         env:
-          # MODEL_AWS_BUCKET: ml-production-artifacts
-          # MODEL_AWS_REGION: eu-central-1
           MODEL_EXPORT_DIRECTORY: "bin/review_classifier/"
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
         run: |
@@ -38,17 +36,3 @@ jobs:
         run: |
           echo $GIT_COMMIT
           python src/register.py
-
-      - name: Download model from registry
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          GIT_COMMIT: ${{ github.event.after }}
-          MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
-          MODEL_AWS_BUCKET: "ml-production-artifacts"
-          MODEL_AWS_REGION: "eu-central-1"
-          NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
-        run: |
-          echo $GIT_COMMIT
-          python src/download_from_registry.py
-          ls
