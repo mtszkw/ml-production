@@ -1,5 +1,4 @@
 import os
-import json
 
 import neptune.new as neptune
 
