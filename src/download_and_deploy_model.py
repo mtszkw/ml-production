@@ -63,9 +63,9 @@ if __name__ == "__main__":
         bucket_name=os.environ['MODEL_AWS_BUCKET'])
     
     # Deploy SageMaker Endpoint from S3 binary
-    # deploy_sagemaker_endpoint_from_s3(model_s3_path=s3_path)
+    deploy_sagemaker_endpoint_from_s3(model_s3_path=s3_path)
     
     # and officially promote the model to production
-    # model_version.change_stage("production")
+    model_version.change_stage("production")
     
     model.stop()
