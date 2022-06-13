@@ -28,5 +28,6 @@ jobs:
       - name: Register model
         env:
           NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
+          MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
         run: |
           python src/register.py
