@@ -43,9 +43,9 @@ if __name__ == "__main__":
     # Get all registered models and find the one with correct GIT_COMMIT
     model_versions_df = model.fetch_model_versions_table().to_pandas()
     print('All versions:', model_versions_df)
-    newest_model = model_versions_df[
-        model_versions_df["data/git_commit"] == os.environ['GIT_COMMIT']
-    ]
+    newest_model = model_versions_df.iloc[-1]
+        # model_versions_df["data/git_commit"] == os.environ['GIT_COMMIT']
+    # ]
     print('Newest version:', newest_model)
 
     for _, model_version in newest_model.iterrows():
@@ -67,5 +67,8 @@ if __name__ == "__main__":
         
         # Deploy SageMaker Endpoint from S3 binary
         deploy_sagemaker_endpoint_from_s3(model_s3_path=s3_path)
+        
+        # and officially promote the model to production
+        model_version.change_stage("production")
     
     model.stop()
