@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [edited, opened, synchronize, reopened]
 jobs:
-  run-workflow:
+  train:
     runs-on: [ubuntu-20.04]
 
     steps:

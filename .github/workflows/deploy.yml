@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  run-workflow:
+  deploy:
     runs-on: [ubuntu-20.04]
 
     steps:
