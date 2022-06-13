@@ -38,7 +38,12 @@ if __name__ == "__main__":
 
     for _, model_version in newest_model.iterrows():
         version_id = model_version["sys/id"]
-        model_version = neptune.init_model_version(version=version_id)
+        model_version = neptune.init_model_version(
+            project='mtszkw/ml-production',
+            api_token=os.environ['NEPTUNE_API_TOKEN'],
+            version=version_id
+        )
+        print(f"Downloading model binary to model_{version_id}.tar.gz")
         model_version["model/binary"].download(f"model_{version_id}.tar.gz")
 
         export_to_s3(
