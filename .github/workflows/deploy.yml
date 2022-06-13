@@ -26,6 +26,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-central-1"
           PULL_REQUEST_ID: ${{ github.event.number }}
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
           MODEL_AWS_BUCKET: "ml-production-artifacts"
