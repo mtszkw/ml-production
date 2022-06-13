@@ -23,10 +23,11 @@ model_version = neptune.init_model_version(
 )
 
 # Save metrics
-model_metrics_json = json.loads('metrics.json')
+with open('metrics.json', 'r') as fp:
+    model_metrics_json = json.loads(fp.readlines())
+    model_version["model/val_acc"] = model_metrics_json['val_acc']
+    model_version["model/val_loss"] = model_metrics_json['val_loss']
 model_version["model/metrics"].upload('metrics.json')
-model_version["model/val_acc"] = model_metrics_json['val_acc']
-model_version["model/val_loss"] = model_metrics_json['val_loss']
 
 model_version["data/pull_request_id"] = os.getenv('PULL_REQUEST_ID', '-1')
 model_version["model/parameters"].upload('parameters.json')

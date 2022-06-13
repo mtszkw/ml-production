@@ -33,4 +33,5 @@ jobs:
           NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
         run: |
           echo $PULL_REQUEST_ID
+          python src/download_and_deploy_model.py
           ls
