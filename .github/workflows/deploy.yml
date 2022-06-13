@@ -17,11 +17,12 @@ jobs:
         run: |
           pip install -r src/requirements.txt
           
-      - name: Run training
+      - name: Download model from registry
         env:
           # MODEL_AWS_BUCKET: ml-production-artifacts
           # MODEL_AWS_REGION: eu-central-1
           MODEL_EXPORT_DIRECTORY: "bin/review_classifier/"
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
+          NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
         run: |
-          ls
+          python src/download_model_from_registry.py
