@@ -3,3 +3,4 @@ sagemaker
 tensorflow
 tensorflow-hub
 tensorflow-datasets
+neptune-client
