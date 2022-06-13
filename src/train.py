@@ -38,7 +38,7 @@ def train_and_save(model_export_path: Path):
 
     # Parameters
     parameters = dict({
-        "epochs": 10,
+        "epochs": 3,
         "batch_size": 512
     })
     with open('parameters.json', 'w') as fp:
