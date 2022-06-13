@@ -76,29 +76,8 @@ def train_and_save(model_export_path: Path):
     )
 
 
-# def export_to_s3(model_archive: Path, region: str, bucket_name: str):
-#     s3_client = boto3.client('s3', region_name=region)
-#     try:
-#         s3_client.head_bucket(Bucket=bucket_name)
-#     except botocore.exceptions.ClientError:
-#         print(f"Bucket {bucket_name} not found, creating new one")
-#         s3_client.create_bucket(
-#             Bucket=bucket_name,
-#             CreateBucketConfiguration={'LocationConstraint': region})
-
-#     print(f"Uploading model to: s3://{bucket_name}/{model_archive}")
-#     s3_client.upload_file(model_archive, bucket_name, model_archive)
-
-
 if __name__ == "__main__":
     train_and_save(model_export_path=os.environ['MODEL_EXPORT_DIRECTORY'])
-
     package_model(
         model_directory=os.environ['MODEL_EXPORT_DIRECTORY'],
         model_output_archive=os.environ['MODEL_ARCHIVE_OUTPUT_PATH'])
-
-    # TODO: only when --export
-    # export_to_s3(
-    #     model_archive=os.environ['MODEL_ARCHIVE_OUTPUT_PATH'],
-    #     region=os.environ['MODEL_AWS_REGION'],
-    #     bucket_name=os.environ['MODEL_AWS_BUCKET'])
