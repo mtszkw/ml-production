@@ -34,7 +34,14 @@ jobs:
         env:
           NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
-          PR_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
-          GH_COMMIT_SHA: ${{ github.sha }}
+          GIT_COMMIT: ${{ github.event.pull_request.head.sha }}
         run: |
           python src/register.py
+
+      - name: Download model from registry
+        env:
+          NEPTUNE_API_TOKEN: ${{ secrets.NEPTUNE_API_TOKEN }}
+          MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
+          GIT_COMMIT: ${{ github.event.pull_request.head.sha }}
+        run: |
+          python src/download_model_from_registry.py
