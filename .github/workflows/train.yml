@@ -19,7 +19,6 @@ jobs:
           
       - name: Run training
         env:
-          # repo_token: ${{ secrets.GITHUB_TOKEN }}
           # MODEL_AWS_BUCKET: ml-production-artifacts
           # MODEL_AWS_REGION: eu-central-1
           MODEL_EXPORT_DIRECTORY: "bin/review_classifier/"
