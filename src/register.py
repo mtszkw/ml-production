@@ -26,8 +26,8 @@ model_version = neptune.init_model_version(
 # Save metrics
 with open('metrics.json') as fp:
     metrics = json.load(fp)
-    model_version["model/val_acc"] = metrics['val_acc']
-    model_version["model/val_loss"] = metrics['val_loss']
+    model_version["model/test_accuracy"] = metrics['test_accuracy']
+    model_version["model/test_loss"] = metrics['test_loss']
 model_version["model/metrics"].upload('metrics.json')
 
 # Save other parameters
