@@ -44,7 +44,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "eu-central-1"
         run: |
-          export MODEL_ENDPOINT_NAME=$(aws sagemaker list-endpoints | jq -r ".Endpoints[].EndpointName")
+          export MODEL_ENDPOINT_NAME=$(aws sagemaker list-endpoints | jq -r ".Endpoints[0].EndpointName")
           
           aws sagemaker-runtime invoke-endpoint \
             --endpoint-name $MODEL_ENDPOINT_NAME \
