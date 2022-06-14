@@ -36,3 +36,27 @@ jobs:
           echo $PULL_REQUEST_ID
           python src/download_and_deploy_model.py
           ls
+
+      - name: Invoke endpoint
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-central-1"
+        run: |
+          export MODEL_ENDPOINT_NAME=$(aws sagemaker list-endpoints | jq -r ".Endpoints[].EndpointName")
+          
+          aws sagemaker-runtime invoke-endpoint \
+            --endpoint-name $MODEL_ENDPOINT_NAME \
+            --body "{\"instances\": [\"absolutely the best\"]}" \
+            --content-type application/json \
+            --accept application/json \
+            --cli-binary-format raw-in-base64-out \
+            results && cat results
+
+          aws sagemaker-runtime invoke-endpoint \
+            --endpoint-name $MODEL_ENDPOINT_NAME \
+            --body "{\"instances\": [\"total crap, nightmare and misunderstanding\"]}" \
+            --content-type application/json \
+            --accept application/json \
+            --cli-binary-format raw-in-base64-out \
+            results && cat results

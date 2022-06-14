@@ -7,7 +7,7 @@ import neptune.new as neptune
 from sagemaker.tensorflow import TensorFlowModel
 
 
-def export_to_s3(model_archive: Path, region: str, bucket_name: str):
+def export_to_s3(model_archive: Path, region: str, bucket_name: str) -> str:
     s3_client = boto3.client('s3', region_name=region)
     try:
         s3_client.head_bucket(Bucket=bucket_name)
@@ -23,14 +23,18 @@ def export_to_s3(model_archive: Path, region: str, bucket_name: str):
     return s3_path
 
 
-def deploy_sagemaker_endpoint_from_s3(model_s3_path: str):
+def deploy_sagemaker_endpoint_from_s3(model_s3_path: str, endpoint_name: str) -> None:
     print("Deploying TensorFlow model to a SageMaker Endpoint...")
     model = TensorFlowModel(
         model_data=model_s3_path,
         role="SageMakerExecutor",
         framework_version="2.6"
     )
-    predictor = model.deploy(initial_instance_count=1, instance_type='ml.c5.xlarge')
+    predictor = model.deploy(
+        initial_instance_count=1,
+        instance_type='ml.c5.xlarge',
+        endpoint_name=endpoint_name
+    )
 
 
 if __name__ == "__main__":
@@ -63,7 +67,10 @@ if __name__ == "__main__":
         bucket_name=os.environ['MODEL_AWS_BUCKET'])
     
     # Deploy SageMaker Endpoint from S3 binary
-    deploy_sagemaker_endpoint_from_s3(model_s3_path=s3_path)
+    deploy_sagemaker_endpoint_from_s3(
+        model_s3_path=s3_path,
+        endpoint_name=f"model_{version_id}"        
+    )
     
     # and officially promote the model to production
     model_version.change_stage("production")
