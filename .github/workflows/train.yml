@@ -18,7 +18,7 @@ jobs:
           
       - name: Run training
         env:
-          MODEL_EXPORT_DIRECTORY: "bin/review_classifier/"
+          MODEL_EXPORT_DIRECTORY: "review_classifier/1"
           MODEL_ARCHIVE_OUTPUT_PATH: "review_classifier.tar.gz"
         run: |
           python src/train.py
