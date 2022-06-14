@@ -2,6 +2,9 @@ name: Quick Training
 on:
   pull_request:
     types: [edited, opened, synchronize, reopened]
+    paths:
+      - '*.py'
+      - '*.yml'
 jobs:
   train:
     runs-on: [ubuntu-20.04]
