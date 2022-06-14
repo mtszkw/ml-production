@@ -3,9 +3,7 @@ on:
   push:
     branches:
       - master
-    paths:
-      - '*.py'
-      - '*.yml'
+
 jobs:
   deploy:
     runs-on: [ubuntu-20.04]
